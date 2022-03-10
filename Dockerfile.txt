@@ -1,3 +1,10 @@
-FROM ubuntu
-CMD apt update && apt-get install tomcat -y
-COPY /var/lib/jenkins/workspace/pi/targets/my-app1.0-SNAPSHOT.jar /var/lib/tomcat9/webapps/my-app1.0-SNAPSHOT.jar
+FROM ubuntu:latest
+RUN apt-get update -y
+RUN apt-get install openjdk-$-jre -y
+RUN echo "JAVA_HOME=/usr/" >> .bashrc
+ADD wget https:https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.59/bin/apache-tomcat-9.0.59.tar.gz
+RUN cd /tmp && tar -xvzf apache-tomcat-9.0.59.tar.gz
+RUN cd /tmp && mv apache-tomcat-9.0.59.tar.gz /opt/
+EXPOSE 8080
+ADD 
+CMD ["/opt/apache-tomcat-9.0.59/bin/catlina.sh","run"]
